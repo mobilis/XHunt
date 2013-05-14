@@ -1,0 +1,1 @@
+XHunt is a location based seek-and-hide game for various platforms.
