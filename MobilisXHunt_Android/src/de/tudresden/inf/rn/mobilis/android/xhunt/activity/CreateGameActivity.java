@@ -510,9 +510,10 @@ public class CreateGameActivity extends PreferenceActivity {
 		
 		if(mSharedPrefHelper.getValue(getResources()
 				.getString(R.string.bundle_key_newgame_pollinginterval)) == null){
+			int polInterval = mMxaProxy.isStaticMode() ? 2 : 10;
 			mSharedPrefHelper.setValue(
 					getResources().getString(R.string.bundle_key_newgame_pollinginterval),
-					"" + 10);
+					"" + polInterval);
 		}
 		
 		mServiceConnector.getXHuntService().getSharedPrefHelper().save();

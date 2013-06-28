@@ -18,7 +18,7 @@
       	    	android:key="@string/bundle_key_settings_staticmode"
 		   		android:title="@string/settings_edit_title_staticmode"
 		    	android:summary="@string/settings_summary_staticmode"
-		    	android:defaultValue="false" />
+		    	android:defaultValue="true" />
       	    <CheckBoxPreference 
       	        android:key="@string/bundle_key_settings_logging"
       	    	android:title="@string/settings_edit_title_logging"
