@@ -68,6 +68,7 @@ import de.tudresden.inf.rn.mobilis.android.xhunt.ui.SeekBarPreference;
 import de.tudresden.inf.rn.mobilis.mxa.parcelable.XMPPIQ;
 import de.tudresden.inf.rn.mobilis.xmpp.beans.XMPPBean;
 import de.tudresden.inf.rn.mobilis.xmpp.beans.coordination.CreateNewServiceInstanceBean;
+import de.tudresden.inf.rn.mobilis.xmpp.beans.coordination.SendNewServiceInstanceBean;
 
 /**
  * The Class CreateGameActivity is used to start up a new XHunt Service on Mobilis-Server
@@ -706,11 +707,20 @@ public class CreateGameActivity extends PreferenceActivity {
 			if( inBean instanceof CreateNewServiceInstanceBean){
 				CreateNewServiceInstanceBean bean = (CreateNewServiceInstanceBean)inBean;
 				
-				if( bean != null && bean.getType() != XMPPBean.TYPE_ERROR ){
+				if( bean != null && bean.getType() == XMPPBean.TYPE_RESULT ){
+					//mMxaProxy.getIQProxy().setGameServiceJid(bean.jidOfNewService);
+					//mMxaProxy.getIQProxy().setServiceVersion( bean.serviceVersion );		
+					//mCreateNewInstanceHandler.sendEmptyMessage(0);
+					//createGame();
+				}
+			}
+			
+			if( inBean instanceof SendNewServiceInstanceBean){
+				SendNewServiceInstanceBean bean = (SendNewServiceInstanceBean) inBean;
+				if( bean !=null && bean.getType() == XMPPBean.TYPE_SET){
 					mMxaProxy.getIQProxy().setGameServiceJid(bean.jidOfNewService);
 					mMxaProxy.getIQProxy().setServiceVersion( bean.serviceVersion );		
 					mCreateNewInstanceHandler.sendEmptyMessage(0);
-					//createGame();
 				}
 			}
 			// Other Beans of type get or set will be responded with an ERROR
