@@ -20,6 +20,7 @@
 package de.tudresden.inf.rn.mobilis.services.xhunt;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -27,6 +28,7 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.PacketExtension;
 
 import de.tudresden.inf.rn.mobilis.server.agents.MobilisAgent;
 import de.tudresden.inf.rn.mobilis.server.services.MobilisService;
@@ -268,5 +270,12 @@ public class XHunt extends MobilisService {
 		
 		LOGGER.info("XHunt#registerPacketListener successfully registered "
 				+ "IQListener and MessageListener");
+	}
+
+
+	@Override
+	public List<PacketExtension> getNodePacketExtensions() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
