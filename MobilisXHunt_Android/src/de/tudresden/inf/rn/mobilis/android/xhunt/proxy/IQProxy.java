@@ -519,6 +519,20 @@ public class IQProxy {
 		
 		Log.v("IQProxy", "CreateNewServiceInstanceBean send");
 	}
+	
+	/**
+	 * Answer the received SendNewServiceInstance with an Result OK.
+	 * @param inBean
+	 */
+	public void AnswerSendNewServiceInstance(SendNewServiceInstanceBean inBean){
+		SendNewServiceInstanceBean bean = new SendNewServiceInstanceBean();
+		bean.setId(inBean.getId());
+		bean.setFrom(mMXAProxy.getXmppJid());
+		bean.setTo(inBean.getFrom());
+		mMXAProxy.sendIQ(beanToIQ(bean, true));
+		
+		Log.v("IQProxy", "SendNewServiceInstanceBean send");
+	}
 
 	/**
 	 * Sends a MobilisServiceDiscoveryBean to the an MobilisXHunt game service.

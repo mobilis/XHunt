@@ -708,10 +708,7 @@ public class CreateGameActivity extends PreferenceActivity {
 				CreateNewServiceInstanceBean bean = (CreateNewServiceInstanceBean)inBean;
 				
 				if( bean != null && bean.getType() == XMPPBean.TYPE_RESULT ){
-					//mMxaProxy.getIQProxy().setGameServiceJid(bean.jidOfNewService);
-					//mMxaProxy.getIQProxy().setServiceVersion( bean.serviceVersion );		
-					//mCreateNewInstanceHandler.sendEmptyMessage(0);
-					//createGame();
+					//just ok. creating instance is in progress
 				}
 			}
 			
@@ -721,6 +718,7 @@ public class CreateGameActivity extends PreferenceActivity {
 					mMxaProxy.getIQProxy().setGameServiceJid(bean.jidOfNewService);
 					mMxaProxy.getIQProxy().setServiceVersion( bean.serviceVersion );		
 					mCreateNewInstanceHandler.sendEmptyMessage(0);
+					mMxaProxy.getIQProxy().AnswerSendNewServiceInstance(bean);
 				}
 			}
 			// Other Beans of type get or set will be responded with an ERROR
