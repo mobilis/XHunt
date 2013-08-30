@@ -75,6 +75,7 @@ import de.tudresden.inf.rn.mobilis.mxa.parcelable.XMPPIQ;
 import de.tudresden.inf.rn.mobilis.xmpp.beans.XMPPBean;
 import de.tudresden.inf.rn.mobilis.xmpp.beans.coordination.CreateNewServiceInstanceBean;
 import de.tudresden.inf.rn.mobilis.xmpp.beans.coordination.MobilisServiceDiscoveryBean;
+import de.tudresden.inf.rn.mobilis.xmpp.beans.coordination.SendNewServiceInstanceBean;
 
 /**
  * The Class IQProxy is a wrapper to simpify the IQ handling.
@@ -335,7 +336,7 @@ public class IQProxy {
 		registerXMPPBean(new CreateGameResponse());
 		
 		registerXMPPBean(new CreateNewServiceInstanceBean());
-		
+		registerXMPPBean(new SendNewServiceInstanceBean());
 		
 		registerXMPPBean(new DepartureDataRequest());
 		registerXMPPBean(new DepartureDataResponse());
@@ -518,6 +519,20 @@ public class IQProxy {
 		
 		Log.v("IQProxy", "CreateNewServiceInstanceBean send");
 	}
+	
+	/**
+	 * Answer the received SendNewServiceInstance with an Result OK.
+	 * @param inBean
+	 */
+	public void AnswerSendNewServiceInstance(SendNewServiceInstanceBean inBean){
+		SendNewServiceInstanceBean bean = new SendNewServiceInstanceBean();
+		bean.setId(inBean.getId());
+		bean.setFrom(mMXAProxy.getXmppJid());
+		bean.setTo(inBean.getFrom());
+		mMXAProxy.sendIQ(beanToIQ(bean, true));
+		
+		Log.v("IQProxy", "SendNewServiceInstanceBean send");
+	}
 
 	/**
 	 * Sends a MobilisServiceDiscoveryBean to the an MobilisXHunt game service.
@@ -606,6 +621,9 @@ public class IQProxy {
 				
 				unregisterXMPPExtension(AbstractCallback, CreateNewServiceInstanceBean.NAMESPACE,
 						CreateNewServiceInstanceBean.CHILD_ELEMENT);
+				
+				unregisterXMPPExtension(AbstractCallback, SendNewServiceInstanceBean.NAMESPACE,
+						SendNewServiceInstanceBean.CHILD_ELEMENT);
 				
 				for ( Map.Entry< String,Map<String,XMPPBean> > entity : this.beanPrototypes.entrySet() ) {
 					for ( Map.Entry< String, XMPPBean > subEntity : entity.getValue().entrySet() ) {
