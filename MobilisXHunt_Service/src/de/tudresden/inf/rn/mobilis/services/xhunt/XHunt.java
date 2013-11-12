@@ -272,10 +272,4 @@ public class XHunt extends MobilisService {
 				+ "IQListener and MessageListener");
 	}
 
-
-	@Override
-	public List<PacketExtension> getNodePacketExtensions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
